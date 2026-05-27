@@ -1,0 +1,787 @@
+use Library_DB
+
+db.createCollection("books")
+
+db.books.insertMany([
+{
+    _id: 1,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    genre: "Fiction",
+    price: 450,
+    availableCopies: 5
+},
+{
+    _id: 2,
+    title: "Rich Dad Poor Dad",
+    author: "Robert Kiyosaki",
+    genre: "Finance",
+    price: 350,
+    availableCopies: 3
+},
+{
+    _id: 3,
+    title: "Atomic Habits",
+    author: "James Clear",
+    genre: "Self Help",
+    price: 799,
+    availableCopies: 7
+},
+{
+    _id: 4,
+    title: "Wings of Fire",
+    author: "A.P.J Abdul Kalam",
+    genre: "Biography",
+    price: 299,
+    availableCopies: 0
+},
+{
+    _id: 5,
+    title: "Harry Potter",
+    author: "J.K Rowling",
+    genre: "Fiction",
+    price: 650,
+    availableCopies: 4
+}
+])
+
+db.books.find()
+
+db.books.find({
+    price: {
+        $gte: 300,
+        $lte: 800
+    }
+})
+
+db.books.find({
+    genre: "Fiction"
+})
+
+db.books.updateOne(
+    { title: "Atomic Habits" },
+    {
+        $set: {
+            price: 850
+        }
+    }
+)
+
+db.books.updateMany(
+    {
+        availableCopies: { $gt: 0 }
+    },
+    {
+        $inc: {
+            availableCopies: 2
+        }
+    }
+)
+
+db.books.deleteOne({
+    title: "Harry Potter"
+})
+
+db.books.deleteMany({
+    availableCopies: 0
+})
+
+use Hospital_DB
+
+db.createCollection("patients")
+
+db.patients.insertMany([
+{
+    _id: 101,
+    name: "Rahul Sharma",
+    age: 45,
+    disease: "Diabetes",
+    doctorAssigned: "Dr. Mehta",
+    city: "Mumbai",
+    email: "rahul@gmail.com"
+},
+{
+    _id: 102,
+    name: "Priya Verma",
+    age: 30,
+    disease: "Asthma",
+    doctorAssigned: "Dr. Singh",
+    city: "Delhi",
+    email: "priya@gmail.com"
+},
+{
+    _id: 103,
+    name: "Amit Patel",
+    age: 65,
+    disease: "Heart Disease",
+    doctorAssigned: "Dr. Shah",
+    city: "Ahmedabad",
+    email: "amit@gmail.com"
+},
+{
+    _id: 104,
+    name: "Sneha Joshi",
+    age: 22,
+    disease: "Diabetes",
+    doctorAssigned: "Dr. Mehta",
+    city: "Pune",
+    email: "sneha@gmail.com"
+},
+{
+    _id: 105,
+    name: "Karan Malhotra",
+    age: 55,
+    disease: "Cancer",
+    doctorAssigned: "Dr. Rao",
+    city: "Mumbai",
+    email: "karan@gmail.com"
+}
+])
+
+db.patients.find()
+
+db.patients.find({
+    age: {
+        $gte: 20,
+        $lte: 50
+    }
+})
+
+db.patients.find({
+    disease: "Diabetes"
+})
+
+db.patients.updateOne(
+    { name: "Rahul Sharma" },
+    {
+        $set: {
+            doctorAssigned: "Dr. Reddy"
+        }
+    }
+)
+
+db.patients.updateMany(
+    {
+        age: { $gt: 60 }
+    },
+    {
+        $inc: {
+            age: 1
+        }
+    }
+)
+
+db.patients.deleteOne({
+    name: "Priya Verma"
+})
+
+db.patients.deleteMany({
+    city: "Mumbai"
+})
+
+db.patients.findOne()
+
+db.patients.find(
+    {},
+    {
+        name: 1,
+        email: 1,
+        _id: 0
+    }
+)
+
+db.patients.find().sort({
+    age: 1
+})
+
+db.patients.find().sort({
+    age: -1
+})
+
+db.patients.find().limit(3)
+
+db.patients.find().skip(2)
+
+db.patients.find({
+    age: { $gt: 40 }
+})
+
+use Library_DB
+
+db.books.find({
+    price: { $lt: 500 }
+})
+
+db.books.find({
+    $and: [
+        { genre: "Fiction" },
+        { price: { $lt: 700 } }
+    ]
+})
+
+use Hospital_DB
+
+db.patients.find({
+    $or: [
+        { city: "Mumbai" },
+        { age: { $gt: 50 } }
+    ]
+})
+already on db Library_DB
+db.books.find()
+use Library_DB
+
+db.dropDatabase()
+already on db Library_DB
+db.dropDatabase()
+{ ok: 1, dropped: 'Library_DB' }
+use Library_DB
+already on db Library_DB
+db.createCollection("books")
+{ ok: 1 }
+db.books.insertMany([
+{
+    _id: 1,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    genre: "Fiction",
+    price: 450,
+    availableCopies: 5
+},
+{
+    _id: 2,
+    title: "Rich Dad Poor Dad",
+    author: "Robert Kiyosaki",
+    genre: "Finance",
+    price: 350,
+    availableCopies: 3
+},
+{
+    _id: 3,
+    title: "Atomic Habits",
+    author: "James Clear",
+    genre: "Self Help",
+    price: 799,
+    availableCopies: 7
+},
+{
+    _id: 4,
+    title: "Wings of Fire",
+    author: "A.P.J Abdul Kalam",
+    genre: "Biography",
+    price: 299,
+    availableCopies: 0
+},
+{
+    _id: 5,
+    title: "Harry Potter",
+    author: "J.K Rowling",
+    genre: "Fiction",
+    price: 650,
+    availableCopies: 4
+}
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 1,
+    '1': 2,
+    '2': 3,
+    '3': 4,
+    '4': 5
+  }
+}
+db.books.find()
+{
+  _id: 1,
+  title: 'The Alchemist',
+  author: 'Paulo Coelho',
+  genre: 'Fiction',
+  price: 450,
+  availableCopies: 5
+}
+{
+  _id: 2,
+  title: 'Rich Dad Poor Dad',
+  author: 'Robert Kiyosaki',
+  genre: 'Finance',
+  price: 350,
+  availableCopies: 3
+}
+{
+  _id: 3,
+  title: 'Atomic Habits',
+  author: 'James Clear',
+  genre: 'Self Help',
+  price: 799,
+  availableCopies: 7
+}
+{
+  _id: 4,
+  title: 'Wings of Fire',
+  author: 'A.P.J Abdul Kalam',
+  genre: 'Biography',
+  price: 299,
+  availableCopies: 0
+}
+{
+  _id: 5,
+  title: 'Harry Potter',
+  author: 'J.K Rowling',
+  genre: 'Fiction',
+  price: 650,
+  availableCopies: 4
+}
+db.books.find({
+    price: {
+        $gte: 300,
+        $lte: 800
+    }
+})
+{
+  _id: 1,
+  title: 'The Alchemist',
+  author: 'Paulo Coelho',
+  genre: 'Fiction',
+  price: 450,
+  availableCopies: 5
+}
+{
+  _id: 2,
+  title: 'Rich Dad Poor Dad',
+  author: 'Robert Kiyosaki',
+  genre: 'Finance',
+  price: 350,
+  availableCopies: 3
+}
+{
+  _id: 3,
+  title: 'Atomic Habits',
+  author: 'James Clear',
+  genre: 'Self Help',
+  price: 799,
+  availableCopies: 7
+}
+{
+  _id: 5,
+  title: 'Harry Potter',
+  author: 'J.K Rowling',
+  genre: 'Fiction',
+  price: 650,
+  availableCopies: 4
+}
+db.books.find({
+    genre: "Fiction"
+})
+{
+  _id: 1,
+  title: 'The Alchemist',
+  author: 'Paulo Coelho',
+  genre: 'Fiction',
+  price: 450,
+  availableCopies: 5
+}
+{
+  _id: 5,
+  title: 'Harry Potter',
+  author: 'J.K Rowling',
+  genre: 'Fiction',
+  price: 650,
+  availableCopies: 4
+}
+db.books.updateOne(
+    { title: "Atomic Habits" },
+    {
+        $set: {
+            price: 850
+        }
+    }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.books.updateMany(
+    {
+        availableCopies: { $gt: 0 }
+    },
+    {
+        $inc: {
+            availableCopies: 2
+        }
+    }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+db.books.deleteOne({
+    title: "Harry Potter"
+})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.books.deleteMany({
+    availableCopies: 0
+})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+use Hospital_DB
+switched to db Hospital_DB
+db.createCollection("patients")
+{ ok: 1 }
+db.patients.insertMany([
+{
+    _id: 101,
+    name: "Rahul Sharma",
+    age: 45,
+    disease: "Diabetes",
+    doctorAssigned: "Dr. Mehta",
+    city: "Mumbai",
+    email: "rahul@gmail.com"
+},
+{
+    _id: 102,
+    name: "Priya Verma",
+    age: 30,
+    disease: "Asthma",
+    doctorAssigned: "Dr. Singh",
+    city: "Delhi",
+    email: "priya@gmail.com"
+},
+{
+    _id: 103,
+    name: "Amit Patel",
+    age: 65,
+    disease: "Heart Disease",
+    doctorAssigned: "Dr. Shah",
+    city: "Ahmedabad",
+    email: "amit@gmail.com"
+},
+{
+    _id: 104,
+    name: "Sneha Joshi",
+    age: 22,
+    disease: "Diabetes",
+    doctorAssigned: "Dr. Mehta",
+    city: "Pune",
+    email: "sneha@gmail.com"
+},
+{
+    _id: 105,
+    name: "Karan Malhotra",
+    age: 55,
+    disease: "Cancer",
+    doctorAssigned: "Dr. Rao",
+    city: "Mumbai",
+    email: "karan@gmail.com"
+}
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 101,
+    '1': 102,
+    '2': 103,
+    '3': 104,
+    '4': 105
+  }
+}
+db.patients.find()
+{
+  _id: 101,
+  name: 'Rahul Sharma',
+  age: 45,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Mumbai',
+  email: 'rahul@gmail.com'
+}
+{
+  _id: 102,
+  name: 'Priya Verma',
+  age: 30,
+  disease: 'Asthma',
+  doctorAssigned: 'Dr. Singh',
+  city: 'Delhi',
+  email: 'priya@gmail.com'
+}
+{
+  _id: 103,
+  name: 'Amit Patel',
+  age: 65,
+  disease: 'Heart Disease',
+  doctorAssigned: 'Dr. Shah',
+  city: 'Ahmedabad',
+  email: 'amit@gmail.com'
+}
+{
+  _id: 104,
+  name: 'Sneha Joshi',
+  age: 22,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Pune',
+  email: 'sneha@gmail.com'
+}
+{
+  _id: 105,
+  name: 'Karan Malhotra',
+  age: 55,
+  disease: 'Cancer',
+  doctorAssigned: 'Dr. Rao',
+  city: 'Mumbai',
+  email: 'karan@gmail.com'
+}
+db.patients.find({
+    age: {
+        $gte: 20,
+        $lte: 50
+    }
+})
+{
+  _id: 101,
+  name: 'Rahul Sharma',
+  age: 45,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Mumbai',
+  email: 'rahul@gmail.com'
+}
+{
+  _id: 102,
+  name: 'Priya Verma',
+  age: 30,
+  disease: 'Asthma',
+  doctorAssigned: 'Dr. Singh',
+  city: 'Delhi',
+  email: 'priya@gmail.com'
+}
+{
+  _id: 104,
+  name: 'Sneha Joshi',
+  age: 22,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Pune',
+  email: 'sneha@gmail.com'
+}
+db.patients.find({
+    disease: "Diabetes"
+})
+{
+  _id: 101,
+  name: 'Rahul Sharma',
+  age: 45,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Mumbai',
+  email: 'rahul@gmail.com'
+}
+{
+  _id: 104,
+  name: 'Sneha Joshi',
+  age: 22,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Pune',
+  email: 'sneha@gmail.com'
+}
+db.patients.updateOne(
+    { name: "Rahul Sharma" },
+    {
+        $set: {
+            doctorAssigned: "Dr. Reddy"
+        }
+    }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.patients.updateMany(
+    {
+        age: { $gt: 60 }
+    },
+    {
+        $inc: {
+            age: 1
+        }
+    }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.patients.deleteOne({
+    name: "Priya Verma"
+})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.patients.deleteMany({
+    city: "Mumbai"
+})
+{
+  acknowledged: true,
+  deletedCount: 2
+}
+db.patients.findOne()
+{
+  _id: 103,
+  name: 'Amit Patel',
+  age: 66,
+  disease: 'Heart Disease',
+  doctorAssigned: 'Dr. Shah',
+  city: 'Ahmedabad',
+  email: 'amit@gmail.com'
+}
+db.patients.find(
+    {},
+    {
+        name: 1,
+        email: 1,
+        _id: 0
+    }
+)
+{
+  name: 'Amit Patel',
+  email: 'amit@gmail.com'
+}
+{
+  name: 'Sneha Joshi',
+  email: 'sneha@gmail.com'
+}
+db.patients.find().sort({
+    age: 1
+})
+{
+  _id: 104,
+  name: 'Sneha Joshi',
+  age: 22,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Pune',
+  email: 'sneha@gmail.com'
+}
+{
+  _id: 103,
+  name: 'Amit Patel',
+  age: 66,
+  disease: 'Heart Disease',
+  doctorAssigned: 'Dr. Shah',
+  city: 'Ahmedabad',
+  email: 'amit@gmail.com'
+}
+db.patients.find().sort({
+    age: -1
+})
+{
+  _id: 103,
+  name: 'Amit Patel',
+  age: 66,
+  disease: 'Heart Disease',
+  doctorAssigned: 'Dr. Shah',
+  city: 'Ahmedabad',
+  email: 'amit@gmail.com'
+}
+{
+  _id: 104,
+  name: 'Sneha Joshi',
+  age: 22,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Pune',
+  email: 'sneha@gmail.com'
+}
+db.patients.find().limit(3)
+{
+  _id: 103,
+  name: 'Amit Patel',
+  age: 66,
+  disease: 'Heart Disease',
+  doctorAssigned: 'Dr. Shah',
+  city: 'Ahmedabad',
+  email: 'amit@gmail.com'
+}
+{
+  _id: 104,
+  name: 'Sneha Joshi',
+  age: 22,
+  disease: 'Diabetes',
+  doctorAssigned: 'Dr. Mehta',
+  city: 'Pune',
+  email: 'sneha@gmail.com'
+}
+db.patients.find().skip(2)
+db.patients.find({
+    age: { $gt: 40 }
+})
+{
+  _id: 103,
+  name: 'Amit Patel',
+  age: 66,
+  disease: 'Heart Disease',
+  doctorAssigned: 'Dr. Shah',
+  city: 'Ahmedabad',
+  email: 'amit@gmail.com'
+}
+use Library_DB
+switched to db Library_DB
+db.books.find({
+    price: { $lt: 500 }
+})
+{
+  _id: 1,
+  title: 'The Alchemist',
+  author: 'Paulo Coelho',
+  genre: 'Fiction',
+  price: 450,
+  availableCopies: 7
+}
+{
+  _id: 2,
+  title: 'Rich Dad Poor Dad',
+  author: 'Robert Kiyosaki',
+  genre: 'Finance',
+  price: 350,
+  availableCopies: 5
+}
+db.books.find({
+    $and: [
+        { genre: "Fiction" },
+        { price: { $lt: 700 } }
+    ]
+})
+{
+  _id: 1,
+  title: 'The Alchemist',
+  author: 'Paulo Coelho',
+  genre: 'Fiction',
+  price: 450,
+  availableCopies: 7
+}
+use Hospital_DB
+switched to db Hospital_DB
+db.patients.find({
+    $or: [
+        { city: "Mumbai" },
+        { age: { $gt: 50 } }
+    ]
+})
