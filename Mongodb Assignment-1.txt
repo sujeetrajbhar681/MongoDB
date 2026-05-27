@@ -1,0 +1,322 @@
+use CRUD_DB
+switched to db CRUD_DB
+db.createCollection("users")
+{ ok: 1 }
+db.users.insertMany([
+  {
+    name: "John",
+    age: 28,
+    email: "john@gmail.com",
+    country: "USA"
+  },
+  {
+    name: "Alice",
+    age: 32,
+    email: "alice@gmail.com",
+    country: "Canada"
+  },
+  {
+    name: "David",
+    age: 24,
+    email: "david@gmail.com",
+    country: "USA"
+  },
+  {
+    name: "Sophia",
+    age: 35,
+    email: "sophia@gmail.com",
+    country: "UK"
+  },
+  {
+    name: "Michael",
+    age: 40,
+    email: "michael@gmail.com",
+    country: "USA"
+  }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a1737d8d5e514cf3693afa0'),
+    '1': ObjectId('6a1737d8d5e514cf3693afa1'),
+    '2': ObjectId('6a1737d8d5e514cf3693afa2'),
+    '3': ObjectId('6a1737d8d5e514cf3693afa3'),
+    '4': ObjectId('6a1737d8d5e514cf3693afa4')
+  }
+}
+db.users.find()
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa0'),
+  name: 'John',
+  age: 28,
+  email: 'john@gmail.com',
+  country: 'USA'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa1'),
+  name: 'Alice',
+  age: 32,
+  email: 'alice@gmail.com',
+  country: 'Canada'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa2'),
+  name: 'David',
+  age: 24,
+  email: 'david@gmail.com',
+  country: 'USA'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa3'),
+  name: 'Sophia',
+  age: 35,
+  email: 'sophia@gmail.com',
+  country: 'UK'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa4'),
+  name: 'Michael',
+  age: 40,
+  email: 'michael@gmail.com',
+  country: 'USA'
+}
+db.users.find({
+  age: {
+    $gte: 25,
+    $lte: 35
+  }
+})
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa0'),
+  name: 'John',
+  age: 28,
+  email: 'john@gmail.com',
+  country: 'USA'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa1'),
+  name: 'Alice',
+  age: 32,
+  email: 'alice@gmail.com',
+  country: 'Canada'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa3'),
+  name: 'Sophia',
+  age: 35,
+  email: 'sophia@gmail.com',
+  country: 'UK'
+}
+db.users.find({
+  country: "USA"
+})
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa0'),
+  name: 'John',
+  age: 28,
+  email: 'john@gmail.com',
+  country: 'USA'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa2'),
+  name: 'David',
+  age: 24,
+  email: 'david@gmail.com',
+  country: 'USA'
+}
+{
+  _id: ObjectId('6a1737d8d5e514cf3693afa4'),
+  name: 'Michael',
+  age: 40,
+  email: 'michael@gmail.com',
+  country: 'USA'
+}
+db.users.updateOne(
+  { name: "John" },
+  {
+    $set: {
+      email: "john_new@gmail.com"
+    }
+  }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.users.updateMany(
+  {
+    age: { $gt: 30 }
+  },
+  {
+    $inc: { age: 1 }
+  }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+db.users.deleteOne({
+  name: "David"
+})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.users.deleteMany({
+  age: { $lt: 25 }
+})
+{
+  acknowledged: true,
+  deletedCount: 0
+}
+use Product_DB
+switched to db Product_DB
+db.createCollection("products")
+{ ok: 1 }
+db.products.insertMany([
+  {
+    name: "Laptop",
+    category: "Electronics",
+    price: 45000,
+    quantity: 10
+  },
+  {
+    name: "Mobile",
+    category: "Electronics",
+    price: 20000,
+    quantity: 15
+  },
+  {
+    name: "Chair",
+    category: "Furniture",
+    price: 3000,
+    quantity: 5
+  },
+  {
+    name: "Shoes",
+    category: "Fashion",
+    price: 2500,
+    quantity: 20
+  },
+  {
+    name: "Watch",
+    category: "Accessories",
+    price: 5000,
+    quantity: 0
+  }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a173845d5e514cf3693afa5'),
+    '1': ObjectId('6a173845d5e514cf3693afa6'),
+    '2': ObjectId('6a173845d5e514cf3693afa7'),
+    '3': ObjectId('6a173845d5e514cf3693afa8'),
+    '4': ObjectId('6a173845d5e514cf3693afa9')
+  }
+}
+db.products.find()
+{
+  _id: ObjectId('6a173845d5e514cf3693afa5'),
+  name: 'Laptop',
+  category: 'Electronics',
+  price: 45000,
+  quantity: 10
+}
+{
+  _id: ObjectId('6a173845d5e514cf3693afa6'),
+  name: 'Mobile',
+  category: 'Electronics',
+  price: 20000,
+  quantity: 15
+}
+{
+  _id: ObjectId('6a173845d5e514cf3693afa7'),
+  name: 'Chair',
+  category: 'Furniture',
+  price: 3000,
+  quantity: 5
+}
+{
+  _id: ObjectId('6a173845d5e514cf3693afa8'),
+  name: 'Shoes',
+  category: 'Fashion',
+  price: 2500,
+  quantity: 20
+}
+{
+  _id: ObjectId('6a173845d5e514cf3693afa9'),
+  name: 'Watch',
+  category: 'Accessories',
+  price: 5000,
+  quantity: 0
+}
+db.products.find({
+  price: {
+    $gte: 20,
+    $lte: 50
+  }
+})
+db.products.find({
+  category: "Electronics"
+})
+{
+  _id: ObjectId('6a173845d5e514cf3693afa5'),
+  name: 'Laptop',
+  category: 'Electronics',
+  price: 45000,
+  quantity: 10
+}
+{
+  _id: ObjectId('6a173845d5e514cf3693afa6'),
+  name: 'Mobile',
+  category: 'Electronics',
+  price: 20000,
+  quantity: 15
+}
+db.products.updateOne(
+  { name: "Laptop" },
+  {
+    $set: {
+      price: 47000
+    }
+  }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.products.updateMany(
+  {
+    quantity: { $gt: 0 }
+  },
+  {
+    $inc: { quantity: -1 }
+  }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+db.products.deleteOne({
+  name: "Chair"
+})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.products.deleteMany({
+  quantity: 0
+})
